@@ -1,18 +1,29 @@
-import React from 'react'
+import React from 'react';
+import TextInput from '../forms/TextInput';
+import _ from 'lodash';
 
 class LoginPage extends React.Component {
-  onSubmit = (a, b) => {
+  constructor(props) {
+    super(props);
+    this.state ={ form: {} };
+  }
+  handleSubmit = (a, b) => {
     console.log(a, b);
     debugger;
+  };
+  handleInputUpdate = (k, v) => {
+    this.setState({ 
+      form: _.extend({}, this.state.form, { [k]: v })
+    });
   };
   render() {
     return (
       <span>
         <h1>Login</h1>
         <form onSubmit={ this.handleSubmit }>
-          <label>Email: <input type="text" onClick={ this.onSubmit }/></label>
-          <label>Password: <input type="password" /></label>
-          <button type="submit" value="Login" onClick={ this.onSubmit }>Login</button>
+          <label>Email: <TextInput name="email" onChange={ this.handleInputUpdate } /></label>
+          <label>Password: <TextInput name="password" type="password" onChange={ this.handleInputUpdate } /></label>
+          <button type="submit" value="Login">Login</button>
         </form>
       </span>
     );
