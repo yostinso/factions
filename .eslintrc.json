@@ -1,0 +1,83 @@
+{
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "paths": [ "app/javascript" ]
+        }
+      }
+    },
+    "rules": {
+        "arrow-body-style": 0,
+        "func-names": 0,
+        "no-alert": "off",
+        "no-else-return": 0,
+        "no-multi-spaces": 0,
+        "no-param-reassign": [2, {"props": false}],
+        "no-var": 0,
+        "object-curly-spacing": 0,
+        "object-shorthand": ["error", "methods"],
+        "quotes": [ 2, "double" ],
+        "react/jsx-curly-spacing": [ 2, "always" ],
+        "react/jsx-equals-spacing": 0,
+        "react/jsx-key": 2,
+        "react/jsx-no-bind": [1, {
+          "ignoreRefs": true,
+          "allowArrowFunctions": false,
+          "allowBind": false
+        }],
+        "react/prefer-es6-class": 0,
+        "react/prefer-stateless-function": 1,
+        "react/no-multi-comp": 0,
+        "react/sort-comp": [1, {
+          "order": [
+              "displayName",
+              "propTypes",
+              "contextTypes",
+              "childContextTypes",
+              "mixins",
+              "statics",
+              "defaultProps",
+              "getDefaultProps",
+              "getInitialState",
+              "getStateFromFlux",
+              "getChildContext",
+              "lifecycle",
+              "everything-else",
+              "/^render.+$/",
+              "render"
+            ]
+        }],
+        "vars-on-top": 0,
+        "no-underscore-dangle": 0,
+        "quote-props": 0,
+        "max-len": 0,
+        "space-before-function-paren": ["error", "never"],
+        "spaced-comment": ["error", "always", { "exceptions": ["/", "*"] }],
+        "wrap-iife": [2, "any"],
+        "no-console": "off",
+        "new-cap": "off",
+        "consistent-return": "off",
+        "import/no-amd": 1,
+        "import/no-commonjs": 1
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true,
+        "jasmine": true
+    },
+    "globals": {
+      "flux": true,
+      "BUILD_FLAG__IS_ADMIN": true
+    },
+    "ecmaFeatures": {
+        "jsx": true,
+        "experimentalObjectRestSpread": true
+    },
+    "parser": "babel-eslint",
+    "extends": "airbnb",
+    "plugins": [
+        "react",
+        "import"
+    ]
+}

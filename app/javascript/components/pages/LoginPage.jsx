@@ -1,19 +1,20 @@
-import React from 'react';
-import TextInput from '../forms/TextInput';
-import _ from 'lodash';
+import React from "react";
+import _ from "lodash";
+
+import TextInput from "../forms/TextInput";
 
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state ={ form: {} };
+    this.state = { form: {} };
   }
   handleSubmit = (a, b) => {
     console.log(a, b);
     debugger;
   };
   handleInputUpdate = (k, v) => {
-    this.setState({ 
-      form: _.extend({}, this.state.form, { [k]: v })
+    this.setState({
+      form: _.extend({}, this.state.form, { [k]: v }),
     });
   };
   render() {
