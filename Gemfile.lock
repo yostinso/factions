@@ -41,6 +41,11 @@ GEM
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
     arel (8.0.0)
+    babel-source (5.8.35)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
+    bcrypt (3.1.11)
     bindex (0.5.0)
     builder (3.2.3)
     byebug (9.0.6)
@@ -54,6 +59,7 @@ GEM
     childprocess (0.7.0)
       ffi (~> 1.0, >= 1.0.11)
     concurrent-ruby (1.0.5)
+    connection_pool (2.2.1)
     erubi (1.6.0)
     execjs (2.7.0)
     ffi (1.9.18)
@@ -114,6 +120,12 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
+    react-rails (2.2.0)
+      babel-transpiler (>= 0.7.0)
+      connection_pool
+      execjs
+      railties (>= 3.2)
+      tilt
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
     sass (3.4.24)
@@ -166,6 +178,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   byebug
   capybara (~> 2.13)
   jbuilder (~> 2.5)
@@ -173,6 +186,7 @@ DEPENDENCIES
   pg (~> 0.18)
   puma (~> 3.7)
   rails (~> 5.1.1)
+  react-rails
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
@@ -183,4 +197,4 @@ DEPENDENCIES
   webpacker
 
 BUNDLED WITH
-   1.15.0
+   1.15.1

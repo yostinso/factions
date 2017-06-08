@@ -6,6 +6,11 @@
 
 # Ignore bundler config.
 /.bundle
+vendor
+
+# Ignore editor files
+*.sw?
+*.vim
 
 # Ignore all logfiles and tempfiles.
 /log/*
