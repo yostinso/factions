@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   resource :login, only: [] do
-    get "index"
-    post "index", to: "login#login", as: "login"
+    get "/", to: "logins#index"
+    post "/", to: "logins#login", as: "login"
     get "logout"
     get "reset_password"
   end
 
-  get "factions/index"
+  resource :faction, only: [] do
+    get "/", to: "factions#index"
+  end
 
   root to: "factions#index"
 end

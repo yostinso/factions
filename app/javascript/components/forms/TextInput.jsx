@@ -10,14 +10,15 @@ class TextInput extends React.Component {
 
   render() {
     return (
-      <input type="text" onChange={ this.handleChange } />
+      <input value={ this.props.value } type={ this.props.type } onChange={ this.handleChange } />
     );
   }
 }
 TextInput.propTypes = {
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(["text", "password"]),
+  value: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(["text", "password", "email"]),
 };
 TextInput.defaultProps = {
   type: "text",
