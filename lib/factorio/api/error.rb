@@ -1,4 +1,4 @@
-class Factorio::API::Exception < StandardError
+class Factorio::API::Error < StandardError
   attr_reader :category, :message, :inner_exception
 
   def initialize(category, message, inner_exception=nil)

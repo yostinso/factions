@@ -23,9 +23,9 @@ class Factorio::API::Auth < Factorio::API
       @login_token = json[0]
     else
       if json && json["message"] == "Insufficient membership"
-        raise Factorio::API::Exception.new(self.class.name, "No ownership found; please purchase the game.")
+        raise Factorio::API::Error.new(self.class.name, "No ownership found; please purchase the game.")
       elsif json
-        raise Factorio::API::Exception.new(self.class.name, json["message"])
+        raise Factorio::API::Error.new(self.class.name, json["message"])
       end
     end
   end

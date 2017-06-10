@@ -1,20 +1,25 @@
 class Factorio::API::Mods < Factorio::API
-  MOD_URL = URI.join(BASE_URL, "mods")
+  MOD_URL = URI.join(BASE_URL, "mods/")
 
-  def initialize(auth)
+  def requires_auth!
+    raise Factorio::API::Exception.new(self.class.name, "Auth required!") unless @auth.try(:logged_in?)
+  end
+
+  def initialize(auth=nil)
     @auth = auth
   end
 
   def get_by_name(name)
-    url = URI.join(MOD_URL, name)
-    resp = Net::HTTP.get.new(url)
+    uri = URI.join(MOD_URL, name)
+    resp = do_get(uri)
     json = parse_json(resp.body)
     if resp.is_a?(Net::HTTPSuccess)
+      json
     else
-      raise Factorio::API::Exception.new(self.class.name, json["detail"])
+      raise Factorio::API::Error.new(self.class.name, json["detail"])
     end
   end
 
-  def download()
+  def download
   end
 end
