@@ -16,12 +16,15 @@ class Mod < ApplicationRecord
       author: json[:owner],
     )
 
-    json[:releases].each do |release|
-      m.mod_releases << ModRelease.from_json(m, release)
+    if json.has_key?(:releases)
+      json[:releases].each do |release|
+        m.mod_releases << ModRelease.from_json(m, release)
+      end
+    elsif json.has_key?(:latest_release)
+        m.mod_releases << ModRelease.from_json(m, json[:latest_release])
     end
-
     
-    unless m.save
+    unless m.valid?
       raise ArgumentError, m.errors.full_messages.join(", ")
     end
     m
