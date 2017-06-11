@@ -60,6 +60,7 @@ guard :rspec, cmd: "bundle exec rspec" do
 
   # Rails libs
   watch(%r{^lib/(.+)\.rb$})    { |m| "spec" }
+  watch(%r{^spec/(lib/.+)\.rb$})    { |m| m[0] }
 
   # Capybara features specs
   watch(rails.view_dirs)     { |m| rspec.spec.call("features/#{m[1]}") }
