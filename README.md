@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Work in progress.
 
-Things you may want to cover:
+## Current planned features:
 
-* Ruby version
+* Mod support (mods.factorio.com) with search/download/enable and bulk download to keep local
+  installs in sync.
 
-* System dependencies
+* Faction management (set allies/enemies etc).
 
-* Configuration
+## Probably some other stuff?=
 
-* Database creation
+* RCON support?
 
-* Database initialization
+* Map generation / save game management?
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* A sister project with all the systemd files I currently use with Factorio?
