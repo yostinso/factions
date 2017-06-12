@@ -30,6 +30,9 @@ class Mod < ApplicationRecord
     m
   end
 
+  def current_url
+    mod_releases.current_release.download_url
+  end
   def supports_version?(game_version)
     self.mod_releases.supporting_version(game_version).exists?
   end

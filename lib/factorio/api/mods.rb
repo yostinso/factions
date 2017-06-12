@@ -1,8 +1,8 @@
 class Factorio::API::Mods < Factorio::API
-  MOD_URI = BASE_URL.merge("mods/")
+  MOD_URI = BASE_URI.merge("mods/")
 
   def requires_auth!
-    raise Factorio::API::Exception.new(self.class.name, "Auth required!") unless @auth.try(:logged_in?)
+    raise Factorio::API::Error.new(self.class.name, "Auth required!") unless @auth.try(:logged_in?)
   end
 
   def initialize(auth=nil)
@@ -35,7 +35,10 @@ class Factorio::API::Mods < Factorio::API
     end
   end
 
-  def download
+  def download(mod, io, &progress)
+    requires_auth!
+    uri = MOD_URI.merge(mod.current_url)
+    do_download(uri, io, auth: @auth, &progress)
   end
 
   private

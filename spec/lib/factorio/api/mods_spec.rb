@@ -25,10 +25,10 @@ RSpec.describe Factorio::API::Auth do
   context "when not authenticated" do
     let(:mods) { Factorio::API::Mods.new }
     describe "#get_by_name" do
-      it "should fail to find a nonexistent mod" do
+      it "should fail to find a nonexistent mod", api: true do
         expect { mods.get_by_name(bad_mod_name) }.to raise_error(Factorio::API::Error, "Not found.")
       end
-      it "should find a mod" do
+      it "should find a mod", api: true do
         m = mods.get_by_name(mod_name)
         expect(m).to powered_floor
       end
@@ -36,11 +36,35 @@ RSpec.describe Factorio::API::Auth do
 
     describe "#search" do
       let(:search_term) { "Powered" }
-      it "should find some mods" do
+      it "should find some mods", api: true do
         results = mods.search(search_term, page_size: 10)
         expect(results).to include(
           have_attributes(name: mod_name)
         )
+      end
+    end
+
+    describe "#download" do
+      let (:mod) { FactoryGirl.create(:mod, :powered_floor) }
+      it "should read a mod into an IO buffer" do
+        expect { mods.download(mod, StringIO.new) }.to raise_error(Factorio::API::Error, "Auth required!")
+      end
+    end
+
+  end
+
+  context "when authenticated" do
+    let(:auth) { FactionsTest.get_test_auth }
+    let(:mods) { Factorio::API::Mods.new(auth) }
+    describe "#download", authed: true do
+    # TODO Follow redirect
+      let (:mod) { FactoryGirl.create(:mod, :powered_floor) }
+      it "should download the file into an IO" do
+        puts auth.inspect
+        puts auth.logged_in?
+        sio = StringIO.new
+        mods.download(mod, sio)
+        puts sio.size
       end
     end
   end
