@@ -56,15 +56,14 @@ RSpec.describe Factorio::API::Auth do
   context "when authenticated" do
     let(:auth) { FactionsTest.get_test_auth }
     let(:mods) { Factorio::API::Mods.new(auth) }
-    describe "#download", authed: true do
-    # TODO Follow redirect
+    describe "#download", authed: true, api: true do
       let (:mod) { FactoryGirl.create(:mod, :powered_floor) }
       it "should download the file into an IO" do
         puts auth.inspect
         puts auth.logged_in?
         sio = StringIO.new
         mods.download(mod, sio)
-        puts sio.size
+        expect(sio.size).to be > 20000
       end
     end
   end
