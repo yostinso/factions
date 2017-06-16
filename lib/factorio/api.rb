@@ -22,7 +22,6 @@ class Factorio::API
       http.request(req) do |response|
         if response.is_a?(Net::HTTPRedirection)
           location = URI(response['Location'])
-          puts "REDIRECTED #{location}"
           raise Factorio::API::Error.new(self.class.name, "Too many redirects") if redirect_limit <= 0
           do_get(location, headers, redirect_limit: redirect_limit - 1, &block)
         else
@@ -38,7 +37,7 @@ class Factorio::API
 
   def do_download(uri, io, headers = DEFAULT_HEADERS, auth: auth=nil)
     do_get(uri, headers, auth: auth) do |response|
-      file_size = response["Content-Length"]
+      file_size = response["Content-Length"].to_i
       fetched = 0
       response.read_body do |chunk|
         io.write(chunk)

@@ -28,10 +28,12 @@ RSpec.describe Factorio::API::Auth do
       it "should fail to find a nonexistent mod", api: true do
         expect { mods.get_by_name(bad_mod_name) }.to raise_error(Factorio::API::Error, "Not found.")
       end
+
       it "should find a mod", api: true do
         m = mods.get_by_name(mod_name)
         expect(m).to powered_floor
       end
+
     end
 
     describe "#search" do
@@ -56,15 +58,23 @@ RSpec.describe Factorio::API::Auth do
   context "when authenticated" do
     let(:auth) { FactionsTest.get_test_auth }
     let(:mods) { Factorio::API::Mods.new(auth) }
-    describe "#download", authed: true, api: true do
+    describe "#download", authed: true do
       let (:mod) { FactoryGirl.create(:mod, :powered_floor) }
-      it "should download the file into an IO" do
-        puts auth.inspect
-        puts auth.logged_in?
+      it "should download the file into an IO", api: true do
         sio = StringIO.new
         mods.download(mod, sio)
         expect(sio.size).to be > 20000
       end
+
+      it "should yield progress when a block is provided", api: true do
+        sio = StringIO.new
+        expect { |progress|
+          mods.download(mod, sio, &progress)
+        }.to yield_matchable_args(all(
+          contain_exactly(be >= 0, be >= 0).and satisfy { |v| v[0] <= v[1] }
+        ))
+      end
+
     end
   end
 end
